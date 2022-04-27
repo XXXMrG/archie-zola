@@ -1,0 +1,26 @@
+name = "archie"
+description = "A zola theme based on Hugo archie."
+license = "MIT"
+homepage = "https://github.com/XXXMrG/archie-zola"
+# The minimum version of Zola required
+min_version = "0.0.1"
+# An optional live demo URL
+demo = ""
+
+# Any variable there can be overridden in the end user `config.toml`
+# You don't need to prefix variables by the theme name but as this will
+# be merged with user data, some kind of prefix or nesting is preferable
+# Use snake_casing to be consistent with the rest of Zola
+[extra]
+
+# The theme author info: you!
+[author]
+name = "Keith"
+homepage = "https://github.com/XXXMrG"
+
+# If this is porting a theme from another static site engine, provide
+# the info of the original author here
+[original]
+author =  "athul"
+homepage = "https://athul.github.io/archie/"
+repo = "https://github.com/athul/archie"

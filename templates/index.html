@@ -1,0 +1,27 @@
+{% import "macros/post.html" as post_macros %}
+
+<!DOCTYPE html>
+<html>
+{% include "partials/header.html" %}
+
+<body>
+    <div class="content">
+        {% include "partials/head.html" %}
+
+        <main class="list">
+            <div class="site-description">
+                {% if config.extra.subtitle %}
+                    {{ config.extra.subtitle | markdown | safe }}
+                {% endif %}
+            </div>
+            {% set section = get_section(path="posts/_index.md") %}
+            {{ post_macros::list_posts(pages=section.pages) }}
+        </main>
+
+        {# TODO: Pagination #}
+
+        {% include "partials/footer.html" %}
+    </div>
+</body>
+
+</html>
