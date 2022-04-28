@@ -1,32 +1,3 @@
-{% macro content(page, summary) %}
-    {%- if summary and page.summary %}
-        <div class="post-content">
-            {{ page.summary | safe }}
-        </div>
-        <div>
-            <!-- &#xFE0E; -- force text style - some devices render this as emoji -->
-            <a class="read-more button" href="{{ page.permalink | safe }}">
-                <span class="button__text">Read more</span>&nbsp;
-                <span class="button__icon">&#8617;&#xFE0E;</span>
-            </a>
-        </div>
-    {% else %}
-        <div class="post-content">
-            {{ page.content | safe }}
-        </div>
-    {%- endif %}
-{% endmacro content %}
-
-
-{% macro date(page) %}
-    <span class="post-date">
-        {%- if page.date %}
-            {{ page.date | date(format="%Y-%m-%d") }}
-        {% endif -%}
-    </span>
-{% endmacro post_date %}
-
-
 {% macro earlier_later(page) %}
     {%- if config.extra.enable_post_view_navigation and page.earlier or page.later %}
         <div class="pagination">
@@ -57,15 +28,22 @@
 {% endmacro earlier_later %}
 
 
-{% macro header(page) %}
-    <h1 class="post-title"><a href="{{ page.permalink | safe }}">{{ page.title }}</a></h1>
-    <div class="post-meta-inline">
-        {{ post_macros::date(page=page) }}
-    </div>
+{% macro list_title(pages, tag_name=false) %}
+    {% if tag_name %}
+        <h1>Entries tagged - "{{ term.name }}"</h1>
+    {% else %}
+        <h1 class="page-title">All articles</h1>
+    {% endif %}
 
-    {{ post_macros::tags(page=page) }}
-{% endmacro header %}
-
+    <ul class="posts">
+        {% for page in pages %}
+            <li class="post">
+                <a href="{{ page.permalink }}">{{ page.title }}</a>
+                <span class="meta">{{ page.date | date(format="%Y-%m-%d") }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+{% endmacro list_title %}
 
 {% macro list_posts(pages) %}
     <ul>
@@ -79,7 +57,7 @@
                 <a href={{ page.permalink }}>{{page.title}}</a>
             </h1>
 
-            <time>{{ page.date | date(format="%Y-%m-%d")}}</time>
+            <time>{{ page.date | date(format="%Y-%m-%d") }}</time>
 
             <br />
             <div class="description">

@@ -3,7 +3,7 @@ description = "A zola theme based on Hugo archie."
 license = "MIT"
 homepage = "https://github.com/XXXMrG/archie-zola"
 # The minimum version of Zola required
-min_version = "0.0.1"
+min_version = "0.0.7"
 # An optional live demo URL
 demo = ""
 

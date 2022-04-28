@@ -1,4 +1,4 @@
-{% import "macros/post.html" as post_macros %}
+{% import "macros/macros.html" as post_macros %}
 
 <head>
     <meta charset="UTF-8">
@@ -33,17 +33,17 @@
         <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
     {% else %}
-        <link href={{ get_url(path="fonts.css") }} rel="stylesheet" />
+        <link href={{ get_url(path="css/fonts.css") }} rel="stylesheet" />
     {% endif %}
 
-    <link rel="stylesheet" type="text/css" media="screen" href={{ get_url(path="main.css") }} />
+    <link rel="stylesheet" type="text/css" media="screen" href={{ get_url(path="css/main.css") }} />
 
     {% if config.extra.mode == "auto" or config.extra.mode == "dark" or config.extra.mode == "toggle" %}
         <link
             rel="stylesheet"
             id="darkModeStyle"
             type="text/css"
-            href={{ get_url(path="dark.css") }}
+            href={{ get_url(path="css/dark.css") }}
             {% if config.extra.mode == "auto" %}
                 media="(prefers-color-scheme: dark)"
             {% endif %}
