@@ -180,6 +180,10 @@ footer {
   padding: var(--footer-padding);
 }
 
+#main_title {
+    margin-bottom: 10px;
+}
+
 /* Common */
 .title h1 {
   margin-bottom: 0;
