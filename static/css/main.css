@@ -318,6 +318,13 @@ background: royalblue;
 color: whitesmoke ;
 }
 
+pre code[class*='language-rust']::before,
+pre code[class*='language-rs']::before {
+content: 'rust';
+background: #FFF8F6;
+color: #FF4647 ;
+}
+
 /* table */
 table {
   border-spacing: 0;
