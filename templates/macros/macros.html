@@ -97,3 +97,44 @@
         </span>
     {% endif -%}
 {% endmacro tags %}
+
+{% macro content(page) %}
+<main>
+    <article>
+        <div class="title">
+            <h1 class="title">{{ page.title }}</h1>
+            <div class="meta">
+                Posted on {{ page.date | date(format="%Y-%m-%d") }}
+
+                {% if page.draft %}
+                    <span class="draft-label">DRAFT</span> 
+                {% endif %}
+            </div>
+        </div>
+
+        {% if page.extra.tldr %}
+            <div class="tldr">
+                <strong>tl;dr:</strong>
+                {{ page.extra.tldr }}
+            </div>
+        {% endif %}
+
+        <section class="body">
+            {{ page.content | safe }}
+        </section>
+
+        {% if page.taxonomies and page.taxonomies.tags %}
+            <div class="post-tags">
+                <nav class="nav tags">
+                    <ul class="tags">
+                        {% for tag in page.taxonomies.tags %}
+                            <li><a href={{ get_taxonomy_url(kind='tags', name=tag) | safe }}>{{ tag }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </div>
+        {% endif %}
+
+    </article>
+</main>
+{% endmacro content %}
