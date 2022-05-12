@@ -1,7 +1,13 @@
-# archie-zola
-----
++++
+title = "Hello archie"
+date = "2022-05-14"
+description = "See how to config your archie theme"
 
-A zola theme forked from https://github.com/athul/archie
+[taxonomies]
+tags = ["showcase"]
++++
+
+> A zola theme forked from https://github.com/athul/archie
 
 ## Demo
 ----
@@ -10,27 +16,28 @@ The Main branch source code hosted on https://archie-zola.vercel.app/
 
 ### ScreenShot
 
+![screenshot light](/screenshot/screenshot-light.png)
 
-
+![screenshot dark](/screenshot/screenshot-dark.png)
 
 ## Installation
 ----
 
 First download this theme to your themes directory:
 
-```
+```bash
 cd themes
 git clone https://github.com/XXXMrG/archie-zola.git
 ```
 
 or add as a git submodule:
 
-```
+```bash
 git submodule add https://github.com/XXXMrG/archie-zola.git  themes/archie-zola
 ```
 
 and then enable it in your config.toml:
-```
+```toml
 theme = "archie-zola"
 ```
 

@@ -3,7 +3,7 @@ base_url = "//archie-zola.vercel.app/"
 
 # The site title and description; used in feeds by default.
 title = "archie-zola"
-description = ""
+description = "A zola theme forked from https://github.com/athul/archie"
 
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
@@ -20,14 +20,14 @@ taxonomies = [
 # Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
 highlight_code = true
 
-highlight_theme = "OneHalfDark"
+highlight_theme = "OneHalfLight"
 
 [extra]
-# Put all your custom variables here
 
 # control dark mode: auto | dark | toggle
 mode = "toggle"
-subtitle = "Minimal and Clean [blog theme for Hugo](https://github.com/athul/archie)"
+
+subtitle = "A zola theme forked from [archie](https://github.com/athul/archie)"
 
 # interal CDN resource
 useCDN = false
@@ -36,6 +36,7 @@ favicon = "/icon/favicon.png"
 
 copyright = "keith"
 
+# config menu path
 [[extra.menu]]
 name = "Home"
 url = "/"
@@ -56,18 +57,19 @@ name = "Tags"
 url = "/tags"
 weight = 4
 
+# config social icon info in the footer
 [[extra.social]]
 icon = "github"
 name = "GitHub"
-url = "https://github.com/athul/archie"
+url = "https://github.com/XXXMrG/archie-zola"
 
 [[extra.social]]
 icon = "twitter"
 name = "Twitter"
-url = "https://github.com/athulcajay/"
+url = "https://github.com/your-name/"
 
 [[extra.social]]
 icon = "gitlab"
 name = "GitLab"
-url = "https://gitlab.com/athul/"
+url = "https://gitlab.com/your-name/"
 
