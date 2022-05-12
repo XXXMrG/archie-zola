@@ -1,10 +1,10 @@
 # archie-zola
-----
+
 
 A zola theme forked from https://github.com/athul/archie
 
 ## Demo
-----
+
 
 The Main branch source code hosted on https://archie-zola.vercel.app/
 
@@ -16,7 +16,7 @@ The Main branch source code hosted on https://archie-zola.vercel.app/
 
 
 ## Installation
-----
+
 
 First download this theme to your themes directory:
 
@@ -37,7 +37,7 @@ theme = "archie-zola"
 ```
 
 ## Feature
-----
+
 * Pagination
 * Tags
 * Auto Dark Mode(based on system theme)
@@ -51,7 +51,7 @@ in the planning stage：
 
 
 ## Config
-----
+
 
 ### Theme config
 
@@ -130,7 +130,7 @@ sort_by = "date"
 Follow this [doc](https://www.getzola.org/documentation/themes/extending-a-theme/) to extend theme.
 
 ## Contributing
-----
+
 Thank you very much for considering contributing to this project!
 
 We appreciate any form of contribution:
