@@ -20,19 +20,19 @@ The Main branch source code hosted on https://archie-zola.vercel.app/
 
 First download this theme to your themes directory:
 
-```
+```bash
 cd themes
 git clone https://github.com/XXXMrG/archie-zola.git
 ```
 
 or add as a git submodule:
 
-```
+```bash
 git submodule add https://github.com/XXXMrG/archie-zola.git  themes/archie-zola
 ```
 
 and then enable it in your config.toml:
-```
+```toml
 theme = "archie-zola"
 ```
 
@@ -52,6 +52,78 @@ in the planning stage：
 
 ## Config
 ----
+
+### Theme config
+
+Cause Zola limited custom config must under the `extra` field, so there are some different with the origin theme:
+
+Demo website config.toml:
+
+```toml
+# control dark mode: auto | dark | toggle
+mode = "toggle"
+
+# subtitle will show under the title in index page
+subtitle = "A zola theme forked from [archie](https://github.com/athul/archie)"
+
+# if set true, will use external CDN resource to load font and js file
+useCDN = false
+
+favicon = "/icon/favicon.png"
+
+# show in the footer
+copyright = "keith"
+
+
+# config menu path
+[[extra.menu]]
+name = "Home"
+url = "/"
+weight = 1
+
+[[extra.menu]]
+name = "All posts"
+url = "/posts"
+weight = 2
+
+[[extra.menu]]
+name = "About"
+url = "/about"
+weight = 3
+
+[[extra.menu]]
+name = "Tags"
+url = "/tags"
+weight = 4
+
+# config social icon info in the footer
+[[extra.social]]
+icon = "github"
+name = "GitHub"
+url = "https://github.com/XXXMrG/archie-zola"
+
+[[extra.social]]
+icon = "twitter"
+name = "Twitter"
+url = "https://github.com/your-name/"
+
+[[extra.social]]
+icon = "gitlab"
+name = "GitLab"
+url = "https://gitlab.com/your-name/"
+
+```
+
+### Content config
+
+**In content/posts/_index.md. I use Zola config: transparent = true to implement the pagination**
+
+In Zola, you can use config in the _index.md to control pagination and sort post list:
+
+```toml
+paginate_by = 3
+sort_by = "date"
+```
 
 ## Extension
 

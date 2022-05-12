@@ -4,9 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% if current_path == "/" %}
     <title>
         {{ config.title | default(value="Home") }}
     </title>
+    {% else %}
+    <title>
+        {{ page.title | default(value=config.title) | default(value="Post") }}
+    </title>
+    {% endif %}
 
     {% if config.extra.favicon %}
          <link rel="icon" type="image/png" href={{ config.extra.favicon }} />
