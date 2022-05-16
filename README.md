@@ -10,9 +10,9 @@ The Main branch source code hosted on https://archie-zola.vercel.app/
 
 ### ScreenShot
 
-![screenshot-light](https://github.com/XXXMrG/archie-zola/blob/main/static/screenshot/screenshot-light.png)
+![screenshot-light](https://archie-zola.vercel.app/screenshot/screenshot-light.png)
 
-![screenshot-dark](https://github.com/XXXMrG/archie-zola/blob/main/static/screenshot/screenshot-dark.png)
+![screenshot-dark](https://archie-zola.vercel.app/screenshot/screenshot-dark.png)
 
 
 ## Installation
