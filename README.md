@@ -1,12 +1,12 @@
 # archie-zola
 
 
-A zola theme forked from https://github.com/athul/archie
+A zola theme forked from [https://github.com/athul/archie](https://github.com/athul/archie)
 
 ## Demo
 
 
-The Main branch source code hosted on https://archie-zola.vercel.app/
+The Main branch source code hosted on [https://archie-zola.vercel.app](https://archie-zola.vercel.app)
 
 ### ScreenShot
 
