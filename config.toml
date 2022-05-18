@@ -36,6 +36,8 @@ favicon = "/icon/favicon.png"
 
 copyright = "keith"
 
+ga = "G-6YGDB8SLBT"
+
 # config menu path
 [[extra.menu]]
 name = "Home"

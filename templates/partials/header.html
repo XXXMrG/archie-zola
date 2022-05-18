@@ -27,6 +27,18 @@
 
     {# opengraph, twitter_cards #}
 
+    {% if config.extra.ga %}
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{config.extra.ga}}"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', '{{config.extra.ga}}');
+        </script>
+    {% endif %}
+
     {# if need icon, load feather.js #}
     {% if config.extra.social and config.extra.useCDN | default(value=false) %}
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>

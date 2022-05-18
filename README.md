@@ -42,10 +42,10 @@ theme = "archie-zola"
 * Tags
 * Auto Dark Mode(based on system theme)
 * Dark/Light Mode toggle
+* Google Analytics Script
 
 in the planning stage：
 
-- [ ] Google Analytics Script
 - [ ] Custom CSS & JS
 - [ ] Twitter Cards & Youtube video
 
@@ -73,6 +73,9 @@ favicon = "/icon/favicon.png"
 
 # show in the footer
 copyright = "keith"
+
+# config your Google Analysis ID
+ga = "XXXX-XXXXX"
 
 
 # config menu path
