@@ -400,8 +400,7 @@ table td {
 }
 
 .footnote-definition {
-    display: inline-grid;
-    grid-auto-flow: column;
+    display: flex;
     align-items: center;
     grid-column-gap: 10px;
 }
