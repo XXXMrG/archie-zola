@@ -3,7 +3,7 @@ base_url = "//archie-zola.vercel.app/"
 
 # The site title and description; used in feeds by default.
 title = "archie-zola"
-description = "A zola theme forked from https://github.com/athul/archie"
+description = "A zola theme forked from [archie](https://github.com/athul/archie)"
 
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
@@ -11,9 +11,7 @@ compile_sass = true
 # Whether to build a search index to be used later on by a JavaScript library
 build_search_index = true
 
-taxonomies = [
-    {name = "tags"}
-]
+taxonomies = [{ name = "tags" }]
 
 [markdown]
 # Whether to do syntax highlighting
@@ -27,8 +25,6 @@ highlight_theme = "OneHalfLight"
 # control dark mode: auto | dark | toggle
 mode = "toggle"
 
-subtitle = "A zola theme forked from [archie](https://github.com/athul/archie)"
-
 # interal CDN resource
 useCDN = false
 
@@ -38,26 +34,23 @@ copyright = "keith"
 
 ga = "G-6YGDB8SLBT"
 
-# config menu path
-[[extra.menu]]
-name = "Home"
-url = "/"
-weight = 1
+[extra.translations]
+languages = [{name = "en", url = "/"}]
 
-[[extra.menu]]
-name = "All posts"
-url = "/posts"
-weight = 2
-
-[[extra.menu]]
-name = "About"
-url = "/about"
-weight = 3
-
-[[extra.menu]]
-name = "Tags"
-url = "/tags"
-weight = 4
+[[extra.translations.en]]
+show_more = "Read more ⟶"
+previous_page = "← Previous"
+next_page = "Next →"
+posted_on = "on "
+posted_by = "Published by"
+read_time = "minute read"
+all_tags = "All tags"
+menus = [
+    { name = "Home", url = "/", weight = 2 },
+    { name = "All posts", url = "/posts", weight = 2 },
+    { name = "About", url = "/about", weight = 3 },
+    { name = "Tags", url = "/tags", weight = 4 },
+]
 
 # config social icon info in the footer
 [[extra.social]]
@@ -74,4 +67,3 @@ url = "https://github.com/XXXMrG/"
 icon = "gitlab"
 name = "GitLab"
 url = "https://gitlab.com/your-name/"
-

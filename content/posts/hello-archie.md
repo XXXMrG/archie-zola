@@ -5,14 +5,16 @@ description = "See how to config your archie theme"
 
 [taxonomies]
 tags = ["showcase"]
+
+[extra]
+author = {name = "Rodolfo Olivieri", social = "https://github.com/r0x0d"}
 +++
 
-> A zola theme forked from https://github.com/athul/archie
-
 ## Demo
+
 ----
 
-The Main branch source code hosted on https://archie-zola.vercel.app/
+The Main branch source code hosted on <https://archie-zola.vercel.app/>
 
 ### ScreenShot
 
@@ -21,6 +23,7 @@ The Main branch source code hosted on https://archie-zola.vercel.app/
 ![screenshot dark](/screenshot/screenshot-dark.png)
 
 ## Installation
+
 ----
 
 First download this theme to your themes directory:
@@ -43,7 +46,9 @@ theme = "archie-zola"
 ```
 
 ## Feature
+
 ----
+
 * Pagination
 * Tags
 * Auto Dark Mode(based on system theme)
@@ -51,12 +56,12 @@ theme = "archie-zola"
 
 in the planning stage：
 
-- [ ] Google Analytics Script
-- [ ] Custom CSS & JS
-- [ ] Twitter Cards & Youtube video
-
+* [ ] Google Analytics Script
+* [ ] Custom CSS & JS
+* [ ] Twitter Cards & Youtube video
 
 ## Config
+
 ----
 
 ### Theme config
@@ -136,10 +141,13 @@ sort_by = "date"
 Follow this [doc](https://www.getzola.org/documentation/themes/extending-a-theme/) to extend theme.
 
 ## Contributing
+
 ----
 Thank you very much for considering contributing to this project!
 
 We appreciate any form of contribution:
 
 * New issues (feature requests, bug reports, questions, ideas, ...)
-* Pull requests (documentation improvements, code improvements, new features, ...)
+* Pull requests (documentation improvements, code improvements, new features, ...)[^zolawebsite]
+
+[^zolawebsite]: Website: [zola](https://getzola.org), GitHub: [getzola/zola](https://github.com/getzola/zola)
