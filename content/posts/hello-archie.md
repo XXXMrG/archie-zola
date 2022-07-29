@@ -7,7 +7,7 @@ description = "See how to config your archie theme"
 tags = ["showcase"]
 
 [extra]
-author = {name = "Rodolfo Olivieri", social = "https://github.com/r0x0d"}
+author = { name = "XXXMRG", social= "https://github.com/XXXMrG" }
 +++
 
 ## Demo
@@ -85,27 +85,28 @@ favicon = "/icon/favicon.png"
 # show in the footer
 copyright = "keith"
 
+# config your Google Analysis ID
+ga = "XXXX-XXXXX"
 
-# config menu path
-[[extra.menu]]
-name = "Home"
-url = "/"
-weight = 1
+# optional: config your i18n entry
+[extra.translations]
+languages = [{name = "en", url = "/"}]
 
-[[extra.menu]]
-name = "All posts"
-url = "/posts"
-weight = 2
-
-[[extra.menu]]
-name = "About"
-url = "/about"
-weight = 3
-
-[[extra.menu]]
-name = "Tags"
-url = "/tags"
-weight = 4
+# config multi-language menu and other text
+[[extra.translations.en]]
+show_more = "Read more ⟶"
+previous_page = "← Previous"
+next_page = "Next →"
+posted_on = "on "
+posted_by = "Published by"
+read_time = "minute read"
+all_tags = "All tags"
+menus = [
+    { name = "Home", url = "/", weight = 2 },
+    { name = "All posts", url = "/posts", weight = 2 },
+    { name = "About", url = "/about", weight = 3 },
+    { name = "Tags", url = "/tags", weight = 4 },
+]
 
 # config social icon info in the footer
 [[extra.social]]
@@ -134,6 +135,12 @@ In Zola, you can use config in the \_index.md to control pagination and sort pos
 ```toml
 paginate_by = 3
 sort_by = "date"
+
+[taxonomies]
+tags = ["FE", "Rust"]
+
+[extra]
+author = { name = "XXXMRG", social= "https://github.com/XXXMrG" }
 ```
 
 ## Extension

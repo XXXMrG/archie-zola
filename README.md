@@ -77,7 +77,7 @@ copyright = "keith"
 # config your Google Analysis ID
 ga = "XXXX-XXXXX"
 
-# config your i18n entry
+# optional: config your i18n entry
 [extra.translations]
 languages = [{name = "en", url = "/"}]
 
