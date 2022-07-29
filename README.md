@@ -77,27 +77,25 @@ copyright = "keith"
 # config your Google Analysis ID
 ga = "XXXX-XXXXX"
 
+# config your i18n entry
+[extra.translations]
+languages = [{name = "en", url = "/"}]
 
-# config menu path
-[[extra.menu]]
-name = "Home"
-url = "/"
-weight = 1
-
-[[extra.menu]]
-name = "All posts"
-url = "/posts"
-weight = 2
-
-[[extra.menu]]
-name = "About"
-url = "/about"
-weight = 3
-
-[[extra.menu]]
-name = "Tags"
-url = "/tags"
-weight = 4
+# config multi-language menu and other text
+[[extra.translations.en]]
+show_more = "Read more ⟶"
+previous_page = "← Previous"
+next_page = "Next →"
+posted_on = "on "
+posted_by = "Published by"
+read_time = "minute read"
+all_tags = "All tags"
+menus = [
+    { name = "Home", url = "/", weight = 2 },
+    { name = "All posts", url = "/posts", weight = 2 },
+    { name = "About", url = "/about", weight = 3 },
+    { name = "Tags", url = "/tags", weight = 4 },
+]
 
 # config social icon info in the footer
 [[extra.social]]
@@ -126,6 +124,12 @@ In Zola, you can use config in the _index.md to control pagination and sort post
 ```toml
 paginate_by = 3
 sort_by = "date"
+
+[taxonomies]
+tags = ["FE", "Rust"]
+
+[extra]
+author = { name = "XXXMRG", social= "https://github.com/XXXMrG" }
 ```
 
 ## Extension
