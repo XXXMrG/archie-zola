@@ -23,6 +23,21 @@ body {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+@keyframes intro {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.content {
+    animation: intro 0.3s both;
+    animation-delay: 0.15s;
+}
+
 ::selection {
     background: var(--maincolor);
     color: #fff;
