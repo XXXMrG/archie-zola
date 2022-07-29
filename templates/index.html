@@ -11,11 +11,11 @@
         {% block main_content %}
         <main class="list">
             <div class="site-description">
-                {% if config.extra.subtitle %}
-                    {{ config.extra.subtitle | markdown | safe }}
+                {% if config.description %}
+                    {{ config.description | markdown | safe }}
                 {% endif %}
             </div>
-            
+
             {%- if paginator %}
                 {%- set show_pages = paginator.pages -%}
             {% else %}
@@ -23,20 +23,20 @@
                 {%- set show_pages = section.pages -%}
             {% endif -%}
 
-            {{ post_macros::list_posts(pages=show_pages) }}
+            {{ post_macros::list_posts(pages=show_pages, extra=config.extra) }}
         </main>
 
         {% if paginator %}
             <ul class="pagination">
                 {% if paginator.previous %}
                     <span class="page-item page-prev">
-                        <a href={{ paginator.previous }} class="page-link" aria-label="Previous"><span aria-hidden="true">← Prev</span></a>
+                        <a href={{ paginator.previous }} class="page-link" aria-label="Previous"><span aria-hidden="true">{{ config.extra.translations[lang][0].previous_page }}</span></a>
                     </span>
                 {% endif %}
 
                 {% if paginator.next %}
                     <span class="page-item page-next">
-                        <a href={{ paginator.next }} class="page-link" aria-label="Next"><span aria-hidden="true">Next →</span></a>
+                        <a href={{ paginator.next }} class="page-link" aria-label="Next"><span aria-hidden="true">{{ config.extra.translations[lang][0].next_page }}</span></a>
                     </span>
                 {% endif %}
             </ul>

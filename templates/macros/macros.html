@@ -15,7 +15,7 @@
     </ul>
 {% endmacro list_title %}
 
-{% macro list_posts(pages) %}
+{% macro list_posts(pages, extra) %}
     <ul>
     {%- for page in pages %}
         {%- if page.draft %}
@@ -28,6 +28,10 @@
             </h1>
 
             <time>{{ page.date | date(format="%Y-%m-%d") }}</time>
+            <span>| {{ page.reading_time }} {{ config.extra.translations[lang][0].read_time }}</span>
+            {% if page.extra.author %}
+                <span>| {{extra.translations[lang][0].posted_by }} <a href="{{ page.extra.author.social }}" target="_blank">{{ page.extra.author.name }}</a></span>
+            {% endif %}
 
             <br />
             <div class="description">
@@ -41,7 +45,7 @@
             </div>
 
             {% if not hide_read_more %}
-                <a class="readmore" href={{ page.permalink }}>Read more ⟶</a>
+                <a class="readmore" href={{ page.permalink }}>{{ extra.translations[lang][0].show_more }}</a>
             {% endif %}
         </section>
 
@@ -68,16 +72,19 @@
     {% endif -%}
 {% endmacro tags %}
 
-{% macro content(page) %}
+{% macro content(page, extra) %}
 <main>
     <article>
         <div class="title">
             <h1 class="title">{{ page.title }}</h1>
             <div class="meta">
-                Posted on {{ page.date | date(format="%Y-%m-%d") }}
+                {% if page.extra.author %}
+                    {{extra.translations[lang][0].posted_by }} <a href="{{ page.extra.author.social }}" target="_blank">{{ page.extra.author.name }}</a>
+                {% endif %}
+                {{ extra.translations[lang][0].posted_on }} {{ page.date | date(format="%Y-%m-%d") }}
 
                 {% if page.draft %}
-                    <span class="draft-label">DRAFT</span> 
+                    <span class="draft-label">DRAFT</span>
                 {% endif %}
             </div>
         </div>

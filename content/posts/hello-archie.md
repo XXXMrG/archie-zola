@@ -5,14 +5,16 @@ description = "See how to config your archie theme"
 
 [taxonomies]
 tags = ["showcase"]
+
+[extra]
+author = {name = "Rodolfo Olivieri", social = "https://github.com/r0x0d"}
 +++
 
-> A zola theme forked from https://github.com/athul/archie
-
 ## Demo
-----
 
-The Main branch source code hosted on https://archie-zola.vercel.app/
+---
+
+The Main branch source code hosted on <https://archie-zola.vercel.app/>
 
 ### ScreenShot
 
@@ -21,7 +23,8 @@ The Main branch source code hosted on https://archie-zola.vercel.app/
 ![screenshot dark](/screenshot/screenshot-dark.png)
 
 ## Installation
-----
+
+---
 
 First download this theme to your themes directory:
 
@@ -43,11 +46,13 @@ theme = "archie-zola"
 ```
 
 ## Feature
-----
-* Pagination
-* Tags
-* Auto Dark Mode(based on system theme)
-* Dark/Light Mode toggle
+
+---
+
+- Pagination
+- Tags
+- Auto Dark Mode(based on system theme)
+- Dark/Light Mode toggle
 
 in the planning stage：
 
@@ -55,9 +60,9 @@ in the planning stage：
 - [ ] Custom CSS & JS
 - [ ] Twitter Cards & Youtube video
 
-
 ## Config
-----
+
+---
 
 ### Theme config
 
@@ -122,9 +127,9 @@ url = "https://gitlab.com/your-name/"
 
 ### Content config
 
-**In content/posts/_index.md. I use Zola config: transparent = true to implement the pagination**
+**In content/posts/\_index.md. I use Zola config: transparent = true to implement the pagination**
 
-In Zola, you can use config in the _index.md to control pagination and sort post list:
+In Zola, you can use config in the \_index.md to control pagination and sort post list:
 
 ```toml
 paginate_by = 3
@@ -136,10 +141,14 @@ sort_by = "date"
 Follow this [doc](https://www.getzola.org/documentation/themes/extending-a-theme/) to extend theme.
 
 ## Contributing
-----
+
+---
+
 Thank you very much for considering contributing to this project!
 
 We appreciate any form of contribution:
 
-* New issues (feature requests, bug reports, questions, ideas, ...)
-* Pull requests (documentation improvements, code improvements, new features, ...)
+- New issues (feature requests, bug reports, questions, ideas, ...)
+- Pull requests (documentation improvements, code improvements, new features, ...)[^zolawebsite]
+
+[^zolawebsite]: Website: [zola](https://getzola.org), GitHub: [getzola/zola](https://github.com/getzola/zola)

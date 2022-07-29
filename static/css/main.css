@@ -231,6 +231,11 @@ time {
     color: grey;
 }
 
+span {
+    color: grey;
+}
+
+
 /* Posts */
 article .title {
     margin-bottom: 1em;
@@ -392,4 +397,10 @@ table th {
 table td {
     padding: 6px 13px;
     border: 1px solid #dfe2e5;
+}
+
+.footnote-definition {
+    display: flex;
+    align-items: center;
+    grid-column-gap: 10px;
 }
