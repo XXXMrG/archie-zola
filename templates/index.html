@@ -15,7 +15,7 @@
                     {{ config.description | markdown | safe }}
                 {% endif %}
             </div>
-            
+
             {%- if paginator %}
                 {%- set show_pages = paginator.pages -%}
             {% else %}
