@@ -13,6 +13,8 @@ build_search_index = true
 
 taxonomies = [{ name = "tags" }]
 
+default_language = "en"
+
 [markdown]
 # Whether to do syntax highlighting
 # Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
