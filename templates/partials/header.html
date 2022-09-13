@@ -11,7 +11,9 @@
     </title>
     {% else %}
     <title>
-        {{ page.title | default(value=config.title) | default(value="Post") }}
+        {% if page.title %} {{ page.title }}
+        {% elif config.title %} {{ config.title }}
+        {% else %}Post{% endif %}
     </title>
     {% endif %}
 
