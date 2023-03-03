@@ -17,11 +17,22 @@
     </title>
     {% endif %}
 
+    {% if page.extra.meta %}
+        <!-- the meta data config goes here  -->
+        {% for data in page.extra.meta %}
+            <meta 
+                {% for key, value in data%}
+                    {{ key }}="{{ value }}"
+                {% endfor %}
+            />
+        {% endfor %}
+    {% endif %}
+
+    
+
     {% if config.extra.favicon %}
          <link rel="icon" type="image/png" href={{ config.extra.favicon }} />
     {% endif %}
-
-    {# TODO: rss, og:image #}
 
     {# opengraph, twitter_cards #}
 

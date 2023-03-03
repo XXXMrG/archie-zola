@@ -43,6 +43,7 @@ theme = "archie-zola"
 * Auto Dark Mode(based on system theme)
 * Dark/Light Mode toggle
 * Google Analytics Script
+* Meta tags for individual pages
 
 in the planning stage：
 
@@ -52,6 +53,38 @@ in the planning stage：
 
 ## Config
 
+### Customize `<meta/>` tags 
+
+The following TOML and YAML code will yiled two `<meta/>` tags, `<meta property="og:title" content="this is a title" />`, `<meta property="og:description" content="this is a description" />`. 
+
+TOML: 
+
+```toml
+title = "hello world"
+description = "hello world"
+date = "2023-01-01"
+[extra]
+    [[meta]]
+    property = "og:title"
+    content = "this is title "
+    [[meta]]
+    property = "og:description"
+    content = "this is description"
+```
+
+YAML: 
+
+```yaml
+title: "hello world"
+description: "hello ya"
+date: "2023-01-01"
+extra: 
+    meta: 
+        - property: "og:title"
+          content: "this is title "
+        - property: "og:description"
+          content: "this is description"
+```
 
 ### Theme config
 
