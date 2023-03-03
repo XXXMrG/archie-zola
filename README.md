@@ -85,7 +85,7 @@ extra:
           content: "the og description"
 ```
 
-If the `og:title` and the `og:description` are not set, the page's title and description will be used. That is, the following TOML code generates `<meta property="og:title" content="post title"/>` and `<meta property="og:description" content="post desc"/>`. 
+If the `og:title`, the `og:description`, or the "description" are not set, the page's title and description will be used. That is, the following TOML code generates `<meta property="og:title" content="post title"/>`, `<meta property="og:description" content="post desc"/>`, and `<meta property="og:description" content="post desc"/>` as default values. 
 
 ```toml
 title = "post title"

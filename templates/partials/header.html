@@ -13,7 +13,10 @@
                         {% set_global page_has_og_title = true -%}
                     {% endif %}
                     {% if key == "property" and value == "og:description"%}
-                        {% set_global page_has_og_desc = true -%}
+                        {% set_global page_has_og_description = true -%}
+                    {% endif %}
+                    {% if key == "name" and value == "description"%}
+                        {% set_global page_has_description = true -%}
                     {% endif %}
                     {{ key }}="{{ value }}"
                 {% endfor %}
@@ -45,6 +48,14 @@
             <meta property="og:description" content="{{ page.description }}" />
         {% elif config.description %}
             <meta property="og:description" content="{{ config.description }}" />
+        {% endif %}
+    {% endif %}
+
+    {% if not page_has_description %}
+        {% if page.description %}
+            <meta name="description" content="{{ page.description }}" />
+        {% elif config.description %}
+            <meta name="description" content="{{ config.description }}" />
         {% endif %}
     {% endif %}
 
