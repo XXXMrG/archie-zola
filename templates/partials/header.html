@@ -4,31 +4,49 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    {% if current_path == "/" %}
-    <title>
-        {{ config.title | default(value="Home") }}
-    </title>
-    {% else %}
-    <title>
-        {% if page.title %} {{ page.title }}
-        {% elif config.title %} {{ config.title }}
-        {% else %}Post{% endif %}
-    </title>
-    {% endif %}
-
     {% if page.extra.meta %}
         <!-- the meta data config goes here  -->
         {% for data in page.extra.meta %}
             <meta 
                 {% for key, value in data%}
+                    {% if key == "property" and value == "og:title"%}
+                        {% set_global page_has_og_title = true -%}
+                    {% endif %}
+                    {% if key == "property" and value == "og:description"%}
+                        {% set_global page_has_og_desc = true -%}
+                    {% endif %}
                     {{ key }}="{{ value }}"
                 {% endfor %}
             />
         {% endfor %}
     {% endif %}
 
-    
+    {% if current_path == "/" %}
+        <title>
+            {{ config.title | default(value="Home") }}
+        </title>
+        {% if not page_has_og_title %}
+            <meta property="og:title" content="{{ config.title | default(value="Home") }}" />
+        {% endif %}
+    {% else %}
+        <title>
+            {% if page.title %} {{ page.title }}
+            {% elif config.title %} {{ config.title }}
+            {% else %} Post {% endif %}
+        </title>
+
+        {% if not page_has_og_title %}
+            <meta property="og:title" content="{% if page.title -%}{{ page.title }}{% elif config.title -%}{{ config.title }}{% else -%}Post{% endif -%}" />
+        {% endif %}
+    {% endif %}
+
+    {% if not page_has_og_description %}
+        {% if page.description %}
+            <meta property="og:description" content="{{ page.description }}" />
+        {% elif config.description %}
+            <meta property="og:description" content="{{ config.description }}" />
+        {% endif %}
+    {% endif %}
 
     {% if config.extra.favicon %}
          <link rel="icon" type="image/png" href={{ config.extra.favicon }} />

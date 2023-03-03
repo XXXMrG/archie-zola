@@ -43,7 +43,7 @@ theme = "archie-zola"
 * Auto Dark Mode(based on system theme)
 * Dark/Light Mode toggle
 * Google Analytics Script
-* Meta tags for individual pages
+* Meta Tags For Individual Pages
 
 in the planning stage：
 
@@ -55,35 +55,42 @@ in the planning stage：
 
 ### Customize `<meta/>` tags 
 
-The following TOML and YAML code will yiled two `<meta/>` tags, `<meta property="og:title" content="this is a title" />`, `<meta property="og:description" content="this is a description" />`. 
+The following TOML and YAML code will yiled two `<meta/>` tags, `<meta property="og:title" content="the og title"/>`, `<meta property="og:description" content="the og description"/>`. 
 
 TOML: 
 
 ```toml
-title = "hello world"
-description = "hello world"
+title = "post title"
+description = "post desc"
 date = "2023-01-01"
+
 [extra]
-    [[meta]]
-    property = "og:title"
-    content = "this is title "
-    [[meta]]
-    property = "og:description"
-    content = "this is description"
+meta = [
+    {property = "og:title", content = "the og title"},
+    {property = "og:description", content = "the og description"},
+]
 ```
 
 YAML: 
 
 ```yaml
-title: "hello world"
-description: "hello ya"
+title: "post title"
+description: "post desc"
 date: "2023-01-01"
 extra: 
     meta: 
         - property: "og:title"
-          content: "this is title "
+          content: "the og title"
         - property: "og:description"
-          content: "this is description"
+          content: "the og description"
+```
+
+If the `og:title` and the `og:description` are not set, the page's title and description will be used. That is, the following TOML code generates `<meta property="og:title" content="post title"/>` and `<meta property="og:description" content="post desc"/>`. 
+
+```toml
+title = "post title"
+description = "post desc"
+date = "2023-01-01"
 ```
 
 ### Theme config
