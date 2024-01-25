@@ -405,9 +405,9 @@ pre code[class*="language-rs"]::before {
 
 pre code[class*="language-cpp"]::before,
 pre code[class*="language-c++"]::before {
-  content: "rust";
-  background: #fff8f6;
-  color: #5e97d0;
+  content: "cpp";
+  background: #5e97d0;
+  color: #044f88;
 }
 
 /* table */
