@@ -403,6 +403,13 @@ pre code[class*="language-rs"]::before {
   color: #ff4647;
 }
 
+pre code[class*="language-cpp"]::before,
+pre code[class*="language-c++"]::before {
+  content: "rust";
+  background: #fff8f6;
+  color: #5e97d0;
+}
+
 /* table */
 table {
   border-spacing: 0;
