@@ -126,6 +126,30 @@ url = "https://gitlab.com/your-name/"
 
 ```
 
+### Latex math formula support
+
+This theme support latex math formula, by using [KaTeX](https://katex.org/).
+
+You can enable it by add `katex_enable = true` in the `extra` section of config.toml:
+
+```toml
+[extra]
+katex_enable = true
+```
+
+After that, you can use latex math formula in your markdown file:
+
+$$
+{x: \mathbf{Num},\ y: \mathbf{Num} \over x + y : \mathbf{Num} }\ (\text{N-Add})
+$$
+
+You can also use inline and block-style:
+
+1. \\( \KaTeX \\) inline
+2. \\[ \KaTeX \\]
+3. $$ \KaTeX $$
+
+
 ### Content config
 
 **In content/posts/\_index.md. I use Zola config: transparent = true to implement the pagination**
