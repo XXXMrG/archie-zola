@@ -36,6 +36,9 @@ copyright = "keith"
 
 ga = "G-6YGDB8SLBT"
 
+katex_enable = true
+
+
 [extra.translations]
 languages = [{name = "en", url = "/"}]
 
