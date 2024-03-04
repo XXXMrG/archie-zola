@@ -7,7 +7,7 @@
     {% if page.extra.meta %}
         <!-- the meta data config goes here  -->
         {% for data in page.extra.meta %}
-            <meta 
+            <meta
                 {% for key, value in data%}
                     {% if key == "property" and value == "og:title"%}
                         {% set_global page_has_og_title = true -%}

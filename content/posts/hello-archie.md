@@ -149,7 +149,6 @@ You can also use inline and block-style:
 2. \\[ \KaTeX \\]
 3. $$ \KaTeX $$
 
-
 ### Content config
 
 **In content/posts/\_index.md. I use Zola config: transparent = true to implement the pagination**
