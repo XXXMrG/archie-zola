@@ -183,15 +183,19 @@ katex_enable = true
 
 After that, you can use latex math formula in your markdown file:
 
+```
 $$
 {x: \mathbf{Num},\ y: \mathbf{Num} \over x + y : \mathbf{Num} }\ (\text{N-Add})
 $$
+```
 
 You can also use inline and block-style:
 
+```
 1. \\( \KaTeX \\) inline
 2. \\[ \KaTeX \\]
 3. $$ \KaTeX $$
+```
 
 ### Content config
 
