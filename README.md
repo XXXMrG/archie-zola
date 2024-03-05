@@ -59,6 +59,7 @@ Finally, check your commit and push it.
 - Dark/Light Mode toggle
 - Google Analytics Script
 - Meta Tags For Individual Pages
+- Support Latex.
 
 in the planning stage：
 
