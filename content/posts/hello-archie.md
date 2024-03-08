@@ -14,7 +14,7 @@ author = { name = "XXXMRG", social= "https://github.com/XXXMrG" }
 
 ---
 
-The Main branch source code hosted on <https://archie-zola.vercel.app/>
+The Main branch source code hosted on <https://archie-zola.netlify.app/>
 
 ### ScreenShot
 

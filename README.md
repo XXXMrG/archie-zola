@@ -4,13 +4,13 @@ A zola theme forked from [https://github.com/athul/archie](https://github.com/at
 
 ## Demo
 
-The Main branch source code hosted on [https://archie-zola.vercel.app](https://archie-zola.vercel.app)
+The Main branch source code hosted on [https://archie-zola.netlify.app](https://archie-zola.netlify.app)
 
 ### ScreenShot
 
-![screenshot-light](https://archie-zola.vercel.app/screenshot/screenshot-light.png)
+![screenshot-light](https://archie-zola.netlify.app/screenshot/screenshot-light.png)
 
-![screenshot-dark](https://archie-zola.vercel.app/screenshot/screenshot-dark.png)
+![screenshot-dark](https://archie-zola.netlify.app/screenshot/screenshot-dark.png)
 
 ## Installation
 
