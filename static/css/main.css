@@ -25,7 +25,7 @@ body {
 
 @keyframes intro {
   0% {
-    opacity: 0;
+    opacity: 0.01;
   }
 
   100% {
