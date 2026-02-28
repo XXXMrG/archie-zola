@@ -19,7 +19,7 @@
             {%- if paginator %}
                 {%- set show_pages = paginator.pages -%}
             {% else %}
-                {% set section = get_section(path="posts/_index.md") %}
+                {% set section = get_section(path="posts/_index.md", lang=lang) %}
                 {%- set show_pages = section.pages -%}
             {% endif -%}
 
