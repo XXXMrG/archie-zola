@@ -1,6 +1,7 @@
 # archie-zola
 
-A clean, minimal Zola theme forked from [archie](https://github.com/athul/archie). Perfect for personal blogs and portfolios with dark/light mode support.
+A clean, minimal [Zola](https://www.getzola.org/) theme forked from
+[archie](https://github.com/athul/archie), with dark/light mode support.
 
 ## Table of Contents
 
@@ -11,6 +12,7 @@ A clean, minimal Zola theme forked from [archie](https://github.com/athul/archie
 - [Configuration](#configuration)
 - [Content Management](#content-management)
 - [Customization](#customization)
+- [Migrating an existing site](#migrating-an-existing-site)
 - [Troubleshooting](#troubleshooting)
 - [Contributing](#contributing)
 
@@ -18,138 +20,189 @@ A clean, minimal Zola theme forked from [archie](https://github.com/athul/archie
 
 **Live Demo:** [https://archie-zola.netlify.app](https://archie-zola.netlify.app)
 
-### Screenshots
-
 | Light Mode | Dark Mode |
 |------------|-----------|
 | ![Light](https://archie-zola.netlify.app/screenshot/screenshot-light.png) | ![Dark](https://archie-zola.netlify.app/screenshot/screenshot-dark.png) |
 
 ## Features
 
-- ✅ **Responsive Design** - Works on desktop, tablet, and mobile
-- ✅ **Dark/Light Mode** - Auto-detection + manual toggle
-- ✅ **Fast & Lightweight** - Minimal CSS and JavaScript
-- ✅ **SEO Optimized** - Meta tags, Open Graph, structured data
-- ✅ **Syntax Highlighting** - Code blocks with theme support
-- ✅ **LaTeX Math** - KaTeX integration for mathematical expressions
-- ✅ **Custom CSS/JS** - Easy theme customization
-- ✅ **Google Analytics** - Built-in GA4 support
-- ✅ **Tags & Pagination** - Organize and navigate content
-- ✅ **Social Links** - Footer social media integration
-
-### Coming Soon
-- 🔄 **Twitter Cards** - Rich social media previews
-- 🔄 **YouTube Embeds** - Video integration
+- Responsive layout
+- Automatic dark mode or a manual dark/light toggle
+- Local fonts and icons, with optional CDN loading
+- Syntax-highlighted code blocks
+- Optional KaTeX math and Google Analytics
+- Custom CSS/JS and page meta tags
+- Tags, homepage pagination, and social links
 
 ## Installation
 
-### Method 1: Git Submodule (Recommended)
+**Requires Zola 0.23.4 or newer; the tested version is 0.23.4**, recorded in
+[.zola-version](.zola-version). Download the archive for your operating system
+and architecture from the official
+[Zola 0.23.4 release](https://github.com/getzola/zola/releases/tag/v0.23.4),
+extract it, and put the `zola` executable on your `PATH`. Check before building:
 
 ```bash
-# Add as submodule
+zola --version
+# Expected: zola 0.23.4
+```
+
+This is a **breaking Tera 2 migration**. The current theme does **not** support
+Zola 0.22.x or older. Read [Migrating an existing site](#migrating-an-existing-site)
+before updating your theme or local template overrides.
+
+### Add the theme to an existing site
+
+From the site's root:
+
+```bash
 git submodule add https://github.com/XXXMrG/archie-zola.git themes/archie-zola
-
-# Enable in config.toml
-echo 'theme = "archie-zola"' >> config.toml
 ```
 
-### Method 2: Direct Clone
+Without Git submodules, clone to the same directory instead:
 
 ```bash
-# Clone to themes directory
 git clone https://github.com/XXXMrG/archie-zola.git themes/archie-zola
-
-# Enable in config.toml
-echo 'theme = "archie-zola"' >> config.toml
 ```
 
-### Updating the Theme
+Set `theme = "archie-zola"` at the top level of your `config.toml`, before any
+`[extra]` or other tables. Do not append a duplicate `theme` key. If your site
+uses Zola's newer `zola.toml` filename, edit that file instead; keep only one
+site configuration file.
+
+### Updating the theme
 
 ```bash
-# Initialize submodules (first time)
-git submodule update --init
-
-# Update to latest version
-git submodule update --remote
-
-# Commit the update
-git add themes/archie-zola
-git commit -m "Update archie-zola theme"
+git submodule update --init --recursive
+git submodule update --remote themes/archie-zola
+zola build
+# Review and commit the theme submodule update in your own site repository.
 ```
+
+If you need the pre-migration theme, pin this existing historical commit;
+there is no new compatibility release or tag:
+
+```bash
+git -C themes/archie-zola checkout f47231e1331e3df31e0f7490170bb76b9cf1d9da
+```
+
+That snapshot is not compatible with Zola 0.23.4. Keep the Zola version and
+site configuration you previously verified with it. Its old demo
+`highlight_code` / `highlight_theme` settings are also invalid on Zola 0.22.x;
+the pin alone is not a fix for those settings.
 
 ## Quick Start
 
-1. **Install the theme** (see above)
-2. **Copy example config** to your `config.toml`:
+After installing Zola 0.23.4, create an empty site and add the theme:
+
+```bash
+mkdir my-blog
+cd my-blog
+git init
+mkdir -p themes content/posts
+git submodule add https://github.com/XXXMrG/archie-zola.git themes/archie-zola
+```
+
+Create `config.toml`:
 
 ```toml
-base_url = "https://yourdomain.com"
+base_url = "https://example.com/"
 title = "Your Blog"
 description = "Your blog description"
 theme = "archie-zola"
+default_language = "en"
+taxonomies = [{ name = "tags" }]
 
-[extra]
-mode = "toggle"  # auto | dark | toggle
-subtitle = "Your tagline here"
+[markdown.highlighting]
+theme = "one-light"
+style = "inline"
 ```
 
-3. **Create your first post**:
+No `[extra]` table is required: the theme supplies English labels, Home/All
+posts/Tags menus, toggle mode, local fonts/icons, and its packaged favicon.
+Analytics, KaTeX, and social links are off until configured. The repository's
+`config.toml` is a fuller demo, not a required starting point.
 
-```bash
-mkdir -p content/posts
-echo '+++
+Create `content/_index.md` to paginate the homepage:
+
+```toml
++++
+paginate_by = 5
+sort_by = "date"
++++
+```
+
+Create **`content/posts/_index.md`** to define the posts archive:
+
+```toml
++++
+template = "posts.html"
+transparent = true
+sort_by = "date"
++++
+```
+
+The folder determines the section URL `/posts/`; do not add the obsolete
+section front-matter `path = "posts"`. `transparent = true` makes posts
+available to the homepage paginator as well as the archive.
+
+Create `content/posts/hello-world.md`:
+
+```markdown
++++
 title = "Hello World"
 date = 2024-01-01
+description = "My first post"
+
+[taxonomies]
+tags = ["hello"]
 +++
 
-Your first post content here.' > content/posts/hello-world.md
+Your first post content here.
 ```
 
-4. **Build and serve**:
+Build, then preview:
 
 ```bash
+zola build
 zola serve
 ```
 
 ## Configuration
 
-### Basic Settings
+### Basic settings
+
+Set your site's `base_url`, `title`, and `description` at the top level, as in
+Quick Start. The homepage uses `description` for the text beneath its title.
+Optional theme settings go under `[extra]`:
 
 ```toml
-base_url = "https://yourdomain.com"
-title = "Your Site Title"
-description = "Your site description"
-theme = "archie-zola"
-
 [extra]
-# Theme mode: "auto" | "dark" | "toggle"
-mode = "toggle"
-
-# Subtitle shown under title on homepage
-subtitle = "Your tagline or description"
-
-# Use CDN for fonts and icons (default: false)
-useCDN = false
-
-# Favicon path
+mode = "toggle"              # auto | dark | toggle
+useCDN = false               # use packaged fonts/icons
 favicon = "/icon/favicon.png"
-
-# Footer copyright text
 copyright = "Your Name"
-
-# Google Analytics ID (optional)
-ga = "G-XXXXXXXXXX"
+# ga = "G-XXXXXXXXXX"        # optional Google Analytics ID
+# katex_enable = true        # optional math support
 ```
 
-### Dark Mode Options
+- `auto` follows the system's dark-mode preference.
+- `dark` always uses the dark stylesheet.
+- `toggle` shows the manual theme-switch button.
 
-- **`auto`** - Automatically follows system preference
-- **`dark`** - Always dark mode
-- **`toggle`** - Shows a toggle button for user choice
+### Navigation and translations
 
-### Navigation Menu
+English labels and Home/All posts/Tags links are supplied by `theme.toml`.
+To override them, retain the legacy **`[[extra.translations.en]]`**
+array-of-tables shape, including the double brackets. Provide a complete
+entry: arrays replace the theme defaults rather than merging labels inside
+an entry. Components fall back to English labels for missing keys. Only add
+an About link if you create a page at `/about/`.
 
 ```toml
+[extra.translations]
+languages = [{ name = "en", url = "/" }]
+
 [[extra.translations.en]]
 show_more = "Read more ⟶"
 previous_page = "← Previous"
@@ -162,11 +215,14 @@ menus = [
     { name = "Home", url = "/", weight = 1 },
     { name = "Posts", url = "/posts", weight = 2 },
     { name = "Tags", url = "/tags", weight = 3 },
-    { name = "About", url = "/about", weight = 4 },
 ]
 ```
 
-### Social Links
+For another language, configure it in Zola and provide the corresponding
+`[[extra.translations.<language-code>]]` labels and menus. The theme's English
+entry remains available when adding other language entries.
+
+### Social links
 
 ```toml
 [[extra.social]]
@@ -175,133 +231,113 @@ name = "GitHub"
 url = "https://github.com/yourusername"
 
 [[extra.social]]
-icon = "twitter"
-name = "Twitter"
-url = "https://twitter.com/yourusername"
-
-[[extra.social]]
 icon = "linkedin"
 name = "LinkedIn"
 url = "https://linkedin.com/in/yourusername"
 ```
 
-### Custom Meta Tags
+Icon names come from [Feather Icons](https://feathericons.com/).
 
-Add custom meta tags to individual pages:
+### Syntax highlighting
+
+Use Zola 0.23.4's [highlighting configuration](https://github.com/getzola/zola/blob/v0.23.4/docs/content/documentation/content/syntax-highlighting.md):
 
 ```toml
-title = "Your Post Title"
-description = "Post description"
-date = "2024-01-01"
-
-[extra]
-meta = [
-    {property = "og:title", content = "Custom OG Title"},
-    {property = "og:description", content = "Custom OG Description"},
-    {property = "og:image", content = "https://example.com/image.jpg"},
-]
+[markdown.highlighting]
+theme = "one-light"
+style = "inline"
 ```
 
-If not specified, the theme will automatically generate Open Graph tags from your page title and description.
+The demo replaces the old Syntect `OneHalfLight` palette, which is not a
+built-in Giallo theme, with the supported `one-light` light palette. It is a
+close alternative, not an exact colour match. Explicit inline styling keeps
+code colours self-contained without another generated colour stylesheet.
+Code blocks remain light in dark mode, as with the previous single light
+highlight theme; this migration does not redesign the theme switcher.
+
+Remove the obsolete `[markdown]` keys `highlight_code` and `highlight_theme`.
+See the [versioned configuration reference](https://github.com/getzola/zola/blob/v0.23.4/docs/content/documentation/getting-started/configuration.md)
+for other supported options. Custom class-based or dual-theme highlighting
+requires corresponding CSS/template integration and is not enabled by default.
 
 ## Content Management
 
-### Posts and Pagination
+### Posts and pagination
 
-Create posts in `content/posts/` directory. Configure pagination in `content/posts/_index.md`:
+Create dated posts in `content/posts/`. The Quick Start's transparent posts
+section passes them to the homepage; set `paginate_by` and `sort_by = "date"`
+in `content/_index.md` to paginate homepage cards. The `/posts/` archive uses
+`posts.html` and lists all posts by default. Set `paginate_by` in
+`content/posts/_index.md` if you also want to paginate that archive; this is
+independent of homepage pagination.
 
-```toml
-+++
-paginate_by = 5
-sort_by = "date"
-template = "posts.html"
-+++
-```
+### Tags and optional post metadata
 
-### Tags
-
-Add tags to any post:
+Register `taxonomies = [{ name = "tags" }]` at the top level of the site's
+configuration. In a post's front matter:
 
 ```toml
 +++
 title = "Your Post"
-date = "2024-01-01"
+date = 2024-01-01
+description = "Post description"
 
 [taxonomies]
-tags = ["tech", "programming", "rust"]
+tags = ["tech", "rust"]
+
+[extra]
+author = { name = "Your Name", social = "https://github.com/yourusername" }
+tldr = "A quick summary of this post"
+meta = [
+    { property = "og:title", content = "Custom OG Title" },
+    { property = "og:image", content = "https://example.com/image.jpg" },
+]
 +++
 ```
 
-Enable tags in your main `config.toml`:
+Without custom values, the theme generates page title/description meta tags.
+For an About page, create `content/about.md` with a title and body, then add
+its link to your menu.
 
-```toml
-taxonomies = [
-    { name = "tags" }
-]
+### Literal template syntax in Markdown
+
+Zola 0.23 renders content with Tera 2 before Markdown. Backticks and fenced
+code blocks alone do **not** protect literal `{{ ... }}`, `{% ... %}`, or old
+shortcode examples. Wrap only the literal example in a raw block, leaving
+real template expressions/components elsewhere in the article active:
+
+````markdown
+{% raw %}
+```html
+{{ example.variable }}
+{% include "example.html" %}
 ```
+{% endraw %}
+````
 
-### Author Information
-
-Add author info to posts:
-
-```toml
-[extra]
-author = { name = "Your Name", social = "https://github.com/yourusername" }
-```
-
-### TL;DR Summary
-
-Add a quick summary to posts:
-
-```toml
-[extra]
-tldr = "Quick summary of what this post is about"
-```
+For entire reference files that must stay literal, Zola also supports the
+top-level `skip_content_templating` list of file glob patterns. Prefer raw
+blocks for mixed articles and keep any skip patterns narrowly targeted;
+do not disable content templating globally just to work around old examples.
 
 ## Customization
 
-### Custom CSS & JavaScript
+### Custom CSS and JavaScript
 
-Add custom styling and functionality:
-
-```toml
-[extra]
-# Custom CSS files (placed in static/css/)
-custom_css = [
-    "css/custom.css",
-    "css/my-theme.css"
-]
-
-# Custom JS files (placed in static/js/)
-custom_js = [
-    "js/custom.js",
-    "js/analytics.js"
-]
-```
-
-**File structure:**
-```
-static/
-├── css/
-│   ├── custom.css
-│   └── my-theme.css
-└── js/
-    ├── custom.js
-    └── analytics.js
-```
-
-The files will be automatically included in the `<head>` section of all pages.
-
-### LaTeX Math Support
-
-Enable mathematical expressions with KaTeX:
+Place files in your site's `static/` directory, then list paths relative to
+that directory. Merge these settings into your existing `[extra]` table:
 
 ```toml
 [extra]
-katex_enable = true
+custom_css = ["css/custom.css"]
+custom_js = ["js/custom.js"]
 ```
 
-Then use in your content:
+The theme includes these files in the page's `<head>`.
+
+### LaTeX math support
+
+Enable KaTeX with `katex_enable = true` under `[extra]`, then use:
 
 ```markdown
 Inline math: \\( E = mc^2 \\)
@@ -312,76 +348,110 @@ $$
 $$
 ```
 
-### Extending the Theme
+KaTeX loads from its CDN when enabled, independently of `useCDN` for fonts
+and icons.
 
-Follow Zola's [theme extension guide](https://www.getzola.org/documentation/themes/extending-a-theme/) to override templates and add custom functionality.
+## Migrating an existing site
+
+1. Install and verify Zola **0.23.4** before updating the theme.
+2. Use an absolute `base_url`, for example `https://example.com/`, not a
+   protocol-relative `//example.com/` URL.
+3. Replace old highlighting keys with `[markdown.highlighting]`, as above.
+4. Remove obsolete section `path` fields from `_index.md`. Page front-matter
+   `path` remains valid, for example the demo's custom About URL.
+5. Check Markdown for literal template or shortcode syntax and protect only
+   those examples with raw blocks.
+6. Migrate **your site's template overrides** as well as the theme. Zola loads
+   local overrides first, so an old `templates/page.html`, partial, or macro
+   file can still cause a Tera parse error after the theme itself is updated.
+   Tera 1 macro declarations/imports and `namespace::macro(...)` calls must be
+   migrated to Tera 2 components, not mixed with the new templates.
+7. Preserve your translation array-of-tables shape and run `zola build`.
+
+### Template API changes
+
+Shared components are now defined in
+[`templates/components.html`](templates/components.html), under the `archie.*`
+namespace. The old `templates/macros/macros.html` file and `post_macros` import
+namespace are removed. For example, replace this Tera 1 override:
+
+```jinja
+{% import "macros/macros.html" as post_macros %}
+{{ post_macros::content(page=page, extra=config.extra) }}
+```
+
+with a Tera 2 component call (no macro import):
+
+```jinja
+{{<archie.content page={page} extra={config.extra} lang={lang} />}}
+```
+
+The shared API also includes `archie.list_posts(pages, extra, lang)`,
+`archie.list_title(pages, tag_name="")`, `archie.tags(page, lang, short=false)`,
+`archie.translate(key, extra, lang)`, and
+`archie.pagination(paginator, extra, lang)`. These are component signatures,
+not function-call syntax: invoke them with `{{<archie.name ... />}}` and pass
+expression-valued arguments in braces. Components receive their data
+explicitly; pass `lang` and `extra` where required instead of relying on old
+macro scope. If you override the shared component file, update its component
+definitions and every caller together.
+
+Consult the theme's current `templates/` files and
+[Zola's theme extension guide](https://www.getzola.org/documentation/themes/extending-a-theme/)
+when rebasing overrides. Do not copy the historical macro files into the new
+version to suppress a missing-component error.
 
 ## Troubleshooting
 
-### Common Issues
-
-**Theme not loading**
-- Ensure `theme = "archie-zola"` is in your `config.toml`
-- Check that the theme is in `themes/archie-zola/`
-
-**Submodule not updating**
-```bash
-git submodule update --init --recursive
-```
-
-**Build errors**
-- Check your `config.toml` syntax
-- Ensure all required fields are present
-- Verify custom CSS/JS files exist
-
-**Dark mode not working**
-- Set `mode = "toggle"` or `"auto"` in `[extra]` section
-- Clear browser cache
-
-### Performance Tips
-
-- Set `useCDN = true` for faster font loading
-- Optimize images in `static/` directory
-- Use `zola build --drafts` during development
+- **Theme not loading:** check the top-level `theme` setting and
+  `themes/archie-zola/` directory. Initialize submodules with
+  `git submodule update --init --recursive`.
+- **Tera parse error near `macro`, `import`, or `::`:** check `zola --version`
+  and migrate local template overrides; downgrading to 0.22.x is not supported
+  by this theme version.
+- **Unknown highlighting field/theme:** use the new schema and a Giallo theme
+  name, not the old `highlight_code`, `highlight_theme`, or `OneHalfLight`.
+- **No posts appearing:** use dated posts and follow Quick Start's section
+  setup. A site without a posts section can build, but create
+  `content/posts/_index.md` when you want the `/posts/` archive.
+- **Unexpected English labels after an override:** missing keys fall back to
+  English. Supply all desired labels in your `[[extra.translations.en]]`
+  (or localized) entry, not just `menus`.
+- **Dark-mode problems:** check `extra.mode` and clear stale browser assets.
+- **Custom assets missing:** verify that each configured CSS/JS path exists
+  below your site's `static/` directory.
 
 ## Contributing
 
-We welcome contributions! Here's how you can help:
+Report bugs with reproduction steps, suggest features, submit focused PRs,
+or improve documentation.
 
-1. **Report bugs** - Open an issue with reproduction steps
-2. **Suggest features** - Describe your use case
-3. **Submit PRs** - Follow the existing code style
-4. **Improve docs** - Help make this README better
-
-### Development Setup
+The repository root is already a demo site. No nested test site or symlink
+is needed:
 
 ```bash
-# Fork and clone the repo
-git clone https://github.com/yourusername/archie-zola.git
+git clone https://github.com/XXXMrG/archie-zola.git
 cd archie-zola
-
-# Create a test site
-zola init test-site
-cd test-site
-echo 'theme = "archie-zola"' >> config.toml
-
-# Link your local theme
-ln -s ../archie-zola themes/
-
-# Start developing
+zola --version  # use 0.23.4
+zola build
 zola serve
+```
+
+Run the real-build regression suite from this directory with Python 3 and
+Zola 0.23.4:
+
+```bash
+python3 -m unittest discover -s tests -v
+# Or select an executable without changing PATH:
+ZOLA_BIN=/absolute/path/to/zola python3 -m unittest discover -s tests -v
 ```
 
 ## License
 
-This theme is released under the MIT License. See [LICENSE](LICENSE) for details.
+This theme is released under the MIT License. See [LICENSE](LICENSE).
 
 ## Credits
 
 - Original [Archie theme](https://github.com/athul/archie) by @athul
 - Ported to Zola by @XXXMrG
 - Icons by [Feather Icons](https://feathericons.com/)
-
----
-
-⭐ **Star this repo** if you find it useful!

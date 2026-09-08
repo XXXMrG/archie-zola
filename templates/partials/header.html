@@ -1,10 +1,11 @@
-{% import "macros/macros.html" as post_macros %}
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% if page.extra.meta %}
+    {% set page_has_og_title = false %}
+    {% set page_has_og_description = false %}
+    {% set page_has_description = false %}
+    {% if page?.extra?.meta %}
         <!-- the meta data config goes here  -->
         {% for data in page.extra.meta %}
             <meta
@@ -33,34 +34,39 @@
         {% endif %}
     {% else %}
         <title>
-            {% if page.title %} {{ page.title }}
+            {% if page?.title %} {{ page.title }}
+            {% elif section?.title %} {{ section.title }}
             {% elif config.title %} {{ config.title }}
             {% else %} Post {% endif %}
         </title>
 
         {% if not page_has_og_title %}
-            <meta property="og:title" content="{% if page.title -%}{{ page.title }}{% elif config.title -%}{{ config.title }}{% else -%}Post{% endif -%}" />
+            <meta property="og:title" content="{% if page?.title -%}{{ page.title }}{% elif section?.title -%}{{ section.title }}{% elif config.title -%}{{ config.title }}{% else -%}Post{% endif -%}" />
         {% endif %}
     {% endif %}
 
     {% if not page_has_og_description %}
-        {% if page.description %}
+        {% if page?.description %}
             <meta property="og:description" content="{{ page.description }}" />
+        {% elif section?.description %}
+            <meta property="og:description" content="{{ section.description }}" />
         {% elif config.description %}
             <meta property="og:description" content="{{ config.description }}" />
         {% endif %}
     {% endif %}
 
     {% if not page_has_description %}
-        {% if page.description %}
+        {% if page?.description %}
             <meta name="description" content="{{ page.description }}" />
+        {% elif section?.description %}
+            <meta name="description" content="{{ section.description }}" />
         {% elif config.description %}
             <meta name="description" content="{{ config.description }}" />
         {% endif %}
     {% endif %}
 
     {% if config.extra.favicon %}
-         <link rel="icon" type="image/png" href={{ config.extra.favicon }} />
+         <link rel="icon" type="image/png" href="{{ config.extra.favicon }}" />
     {% endif %}
 
     {# opengraph, twitter_cards #}
@@ -81,7 +87,7 @@
     {% if config.extra.social and config.extra.useCDN | default(value=false) %}
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     {% elif config.extra.social or config.extra.mode == "toggle" %}
-        <script src={{ get_url(path="js/feather.min.js") }}></script>
+        <script src="{{ get_url(path="js/feather.min.js") }}"></script>
     {% endif %}
 
 
@@ -90,17 +96,17 @@
         <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
     {% else %}
-        <link href={{ get_url(path="css/fonts.css") }} rel="stylesheet" />
+        <link href="{{ get_url(path="css/fonts.css") }}" rel="stylesheet" />
     {% endif %}
 
-    <link rel="stylesheet" type="text/css" media="screen" href={{ get_url(path="css/main.css") }} />
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ get_url(path="css/main.css") }}" />
 
     {% if config.extra.mode == "auto" or config.extra.mode == "dark" or config.extra.mode == "toggle" %}
         <link
             rel="stylesheet"
             id="darkModeStyle"
             type="text/css"
-            href={{ get_url(path="css/dark.css") }}
+            href="{{ get_url(path="css/dark.css") }}"
             {% if config.extra.mode == "auto" %}
                 media="(prefers-color-scheme: dark)"
             {% endif %}

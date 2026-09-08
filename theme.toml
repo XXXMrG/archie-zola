@@ -3,7 +3,7 @@ description = "A zola theme based on Hugo archie."
 license = "MIT"
 homepage = "https://github.com/XXXMrG/archie-zola"
 # The minimum version of Zola required
-min_version = "0.14.0"
+min_version = "0.23.4"
 # An optional live demo URL
 demo = "https://archie-zola.netlify.app/"
 
@@ -12,6 +12,33 @@ demo = "https://archie-zola.netlify.app/"
 # be merged with user data, some kind of prefix or nesting is preferable
 # Use snake_casing to be consistent with the rest of Zola
 [extra]
+mode = "toggle"
+useCDN = false
+favicon = "/icon/favicon.png"
+copyright = ""
+ga = ""
+katex_enable = false
+social = []
+custom_css = []
+custom_js = []
+
+[extra.translations]
+languages = [{ name = "en", url = "/" }]
+
+# Keep the legacy array-of-tables shape for existing site configurations.
+[[extra.translations.en]]
+show_more = "Read more ⟶"
+previous_page = "← Previous"
+next_page = "Next →"
+posted_on = "on "
+posted_by = "Published by"
+read_time = "minute read"
+all_tags = "All tags"
+menus = [
+    { name = "Home", url = "/", weight = 1 },
+    { name = "All posts", url = "/posts", weight = 2 },
+    { name = "Tags", url = "/tags", weight = 3 },
+]
 
 # The theme author info: you!
 [author]

@@ -1,3 +1,5 @@
 public/
 .vscode/
 .DS_Store
+__pycache__/
+*.py[cod]

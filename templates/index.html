@@ -1,5 +1,3 @@
-{% import "macros/macros.html" as post_macros %}
-
 <!DOCTYPE html>
 <html lang="{{lang}}">
 {% include "partials/header.html" %}
@@ -18,29 +16,17 @@
 
             {%- if paginator %}
                 {%- set show_pages = paginator.pages -%}
-            {% else %}
-                {% set section = get_section(path="posts/_index.md", lang=lang) %}
+            {% elif section?.ancestors %}
                 {%- set show_pages = section.pages -%}
+            {% else %}
+                {% set posts_section = get_section(path="posts/_index.md", lang=lang, allow_missing=true) %}
+                {%- set show_pages = posts_section?.pages or section?.pages or [] -%}
             {% endif -%}
 
-            {{ post_macros::list_posts(pages=show_pages, extra=config.extra) }}
+            {{<archie.list_posts pages={show_pages} extra={config.extra} lang />}}
         </main>
 
-        {% if paginator %}
-            <ul class="pagination">
-                {% if paginator.previous %}
-                    <span class="page-item page-prev">
-                        <a href={{ paginator.previous }} class="page-link" aria-label="Previous"><span aria-hidden="true">{{ config.extra.translations[lang][0].previous_page }}</span></a>
-                    </span>
-                {% endif %}
-
-                {% if paginator.next %}
-                    <span class="page-item page-next">
-                        <a href={{ paginator.next }} class="page-link" aria-label="Next"><span aria-hidden="true">{{ config.extra.translations[lang][0].next_page }}</span></a>
-                    </span>
-                {% endif %}
-            </ul>
-        {% endif %}
+        {{<archie.pagination paginator={paginator or false} extra={config.extra} lang />}}
 
         {% endblock main_content %}
 
