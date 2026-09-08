@@ -2,6 +2,7 @@
 
 {% block main_content %}
 
-{{ post_macros::list_title(pages=term.pages, tag_name=term.name) }}
+{{<archie.list_title pages={paginator?.pages or term.pages} tag_name={term.name} />}}
+{{<archie.pagination paginator={paginator or false} extra={config.extra} lang />}}
 
 {% endblock main_content %}

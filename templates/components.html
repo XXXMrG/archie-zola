@@ -1,0 +1,141 @@
+{# Components have isolated contexts: pass extra and lang explicitly. #}
+{%- component archie.translate(key, extra, lang) -%}
+    {%- set defaults = {"show_more": "Read more ⟶", "previous_page": "← Previous", "next_page": "Next →", "posted_on": "on", "posted_by": "Published by", "read_time": "minute read", "all_tags": "All tags"} -%}
+    {%- set english = extra.translations?.en?[0] or {} -%}
+    {%- set localized = extra.translations?[lang]?[0] or {} -%}
+    {%- set labels = {...defaults, ...english, ...localized} -%}
+    {{- labels[key] -}}
+{%- endcomponent archie.translate -%}
+
+{% component archie.list_title(pages, tag_name="") %}
+    {% if tag_name %}
+        <h1>Entries tagged - "{{ tag_name }}"</h1>
+    {% else %}
+        <h1 class="page-title">All articles</h1>
+    {% endif %}
+
+    <ul class="posts">
+        {% for page in pages %}
+            <li class="post">
+                <a href="{{ page.permalink }}">{{ page.title or "" }}</a>
+                {% if page.date %}<span class="meta">{{ page.date | date(format="%Y-%m-%d") }}</span>{% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endcomponent archie.list_title %}
+
+{% component archie.list_posts(pages, extra, lang) %}
+    <ul>
+    {%- for page in pages %}
+        {%- if page.draft %}
+            {% continue %}
+        {% endif -%}
+
+        <section class="list-item">
+            <h1 class="title">
+                <a href="{{ page.permalink }}">{{ page.title or "" }}</a>
+            </h1>
+
+            {% if page.date %}<time>{{ page.date | date(format="%Y-%m-%d") }}</time>{% endif %}
+            <span>| {{ page.reading_time }} {{<archie.translate key="read_time" extra lang />}}</span>
+            {% if page.extra?.author?.name %}
+                <span>| {{<archie.translate key="posted_by" extra lang />}} {% if page.extra.author.social %}<a href="{{ page.extra.author.social }}" target="_blank">{{ page.extra.author.name }}</a>{% else %}{{ page.extra.author.name }}{% endif %}</span>
+            {% endif %}
+
+            <br />
+            <div class="description">
+                {% if page.description %}
+                    {{ page.description }}
+                {% elif page.summary %}
+                    {{ page.summary | safe }}&hellip;
+                {% endif %}
+            </div>
+
+            {% if page.description or page.summary %}
+                <a class="readmore" href="{{ page.permalink }}">{{<archie.translate key="show_more" extra lang />}}</a>
+            {% endif %}
+        </section>
+
+    {% endfor -%}
+    </ul>
+{% endcomponent archie.list_posts %}
+
+
+{% component archie.tags(page, lang, short=false) %}
+    {%- if page.taxonomies?.tags %}
+        <span class="post-tags-inline">
+            {%- if short %}
+                ::
+                {%- set sep = "," -%}
+            {% else %}
+                :: tags:&nbsp;
+                {%- set sep = "&nbsp;" -%}
+            {% endif -%}
+            {%- for tag in page.taxonomies.tags %}
+                <a class="post-tag" href="{{ get_taxonomy_url(kind='tags', term=tag, lang=lang) }}">#{{ tag }}</a>
+                {%- if not loop.last %}{{ sep | safe }}{% endif -%}
+            {% endfor -%}
+        </span>
+    {% endif -%}
+{% endcomponent archie.tags %}
+
+{% component archie.content(page, extra, lang) %}
+<main>
+    <article>
+        <div class="title">
+            <h1 class="title">{{ page.title or "" }}</h1>
+            <div class="meta">
+                {% if page.extra?.author?.name %}
+                    {{<archie.translate key="posted_by" extra lang />}} {% if page.extra.author.social %}<a href="{{ page.extra.author.social }}" target="_blank">{{ page.extra.author.name }}</a>{% else %}{{ page.extra.author.name }}{% endif %}
+                {% endif %}
+                {% if page.date %}{{<archie.translate key="posted_on" extra lang />}} {{ page.date | date(format="%Y-%m-%d") }}{% endif %}
+
+                {% if page.draft %}
+                    <span class="draft-label">DRAFT</span>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if page.extra?.tldr %}
+            <div class="tldr">
+                <strong>tl;dr:</strong>
+                {{ page.extra.tldr }}
+            </div>
+        {% endif %}
+
+        <section class="body">
+            {{ page.content | safe }}
+        </section>
+
+        {% if page.taxonomies?.tags %}
+            <div class="post-tags">
+                <nav class="nav tags">
+                    <ul class="tags">
+                        {% for tag in page.taxonomies.tags %}
+                            <li><a href="{{ get_taxonomy_url(kind='tags', term=tag, lang=lang) }}">{{ tag }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </div>
+        {% endif %}
+
+    </article>
+</main>
+{% endcomponent archie.content %}
+
+{% component archie.pagination(paginator, extra, lang) %}
+    {% if paginator %}
+        <ul class="pagination">
+            {% if paginator.previous %}
+                <span class="page-item page-prev">
+                    <a href="{{ paginator.previous }}" class="page-link" aria-label="Previous"><span aria-hidden="true">{{<archie.translate key="previous_page" extra lang />}}</span></a>
+                </span>
+            {% endif %}
+            {% if paginator.next %}
+                <span class="page-item page-next">
+                    <a href="{{ paginator.next }}" class="page-link" aria-label="Next"><span aria-hidden="true">{{<archie.translate key="next_page" extra lang />}}</span></a>
+                </span>
+            {% endif %}
+        </ul>
+    {% endif %}
+{% endcomponent archie.pagination %}

@@ -1,5 +1,5 @@
 # The URL the site will be built for
-base_url = "//archie-zola.netlify.app/"
+base_url = "https://archie-zola.netlify.app/"
 
 # The site title and description; used in feeds by default.
 title = "archie-zola"
@@ -15,12 +15,11 @@ taxonomies = [{ name = "tags" }]
 
 default_language = "en"
 
-[markdown]
-# Whether to do syntax highlighting
-# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
-highlight_code = true
-
-highlight_theme = "OneHalfLight"
+[markdown.highlighting]
+# Zola 0.23.4 uses Giallo/TextMate themes; OneHalfLight is no longer built in.
+# Keep a similar light palette and inline colours without an extra stylesheet.
+theme = "one-light"
+style = "inline"
 
 [extra]
 

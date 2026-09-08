@@ -1,6 +1,14 @@
 {% extends "index.html" %}
 
 {% block main_content %}
-    {% set section = get_section(path="posts/_index.md", lang=lang) %}
-    {{ post_macros::list_title(pages=section.pages) }}
+    {% if paginator %}
+        {% set show_pages = paginator.pages %}
+    {% elif section %}
+        {% set show_pages = section.pages %}
+    {% else %}
+        {% set posts_section = get_section(path="posts/_index.md", lang=lang, allow_missing=true) %}
+        {% set show_pages = posts_section?.pages or [] %}
+    {% endif %}
+    {{<archie.list_title pages={show_pages} />}}
+    {{<archie.pagination paginator={paginator or false} extra={config.extra} lang />}}
 {% endblock main_content %}

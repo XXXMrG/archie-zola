@@ -2,13 +2,13 @@
 
 
 {% block main_content %}
-    <h1 class="page-title">{{ config.extra.translations[lang][0].all_tags }}</h1>
+    <h1 class="page-title">{{<archie.translate key="all_tags" extra={config.extra} lang />}}</h1>
 
     <div class="tag-cloud">
         <ul class="tags">
             {% for term in terms %}
             <li>
-                <a href="{{ term.permalink | safe }}">
+                <a href="{{ term.permalink }}">
                     {{ term.name }} ({{ term.pages | length }} post{{ term.pages | length | pluralize }})
                 </a>
             </li>
