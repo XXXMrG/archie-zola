@@ -1,0 +1,6 @@
+{
+  "framework": null,
+  "installCommand": "curl -fL https://github.com/getzola/zola/releases/download/v0.23.4/zola-v0.23.4-x86_64-unknown-linux-musl.tar.gz -o /tmp/zola.tar.gz && tar -xzf /tmp/zola.tar.gz zola",
+  "buildCommand": "./zola build",
+  "outputDirectory": "public"
+}
